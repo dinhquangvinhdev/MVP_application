@@ -17,9 +17,9 @@ public class NumberPresenter implements NumberContract.Presenter{
     public void handleNumberIsTen(int number) {
         //get model in here but in this example it do not need it
         if(number == 10){
-            view.showNotification("Congratulation");
+            view.toastNotification("Congratulation");
         }
-        view.showNotification("Failed\nmuahahahaha");
+        view.toastNotification("Failed\nmuahahahaha");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class NumberPresenter implements NumberContract.Presenter{
 
     @Override
     public void stopMThread() {
-        if (mLooperThread != null) {
+        if (mLooperThread.isAlive()) {
             mLooperThread.stopThread();
         }
         MConst.resetNumber();
@@ -48,6 +48,7 @@ public class NumberPresenter implements NumberContract.Presenter{
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    isRunning = false;
                 }
             }
         }
